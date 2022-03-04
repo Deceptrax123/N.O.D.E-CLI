@@ -54,3 +54,12 @@ class signUp(c):
     def check_unique(self):
         # check uniqueness of username,phone no,email
         pass
+
+    def validate(self):
+        pass
+
+    def create_user_profile(self):
+        cre = "create table {Name} (id int(100),service varchar(100),org varchar(100),status int(10)".format(
+            name=self.user)
+        self.cursorU.execute(cre)
+        self.dbU.commit()
