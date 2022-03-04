@@ -2,7 +2,7 @@ import mysql.connector as c
 import time
 
 con = c.connect(host="localhost", user="root",
-                passwd="june16nevada19", database="user_dat")
+                passwd="<enter password>", database="user_dat")
 cursor = con.cursor()
 
 
@@ -22,10 +22,14 @@ class signUp():
         checker = self.checkType()
         if checker == 0:
             st = "insert into user_details values({Id},'{name}','{num}','{email}','{dob}','{doe}','{pswd}')".format(
-                Id=id, name=self.name, num=self.num, email=self.email, dob=self.dob, doe=self.doe, pswd=self.pwd)
+                Id=id, name=self.user, num=self.num, email=self.email, dob=self.dob, doe=self.doe, pswd=self.pwd)
             cursor.execute(st)
+            con.commit()
 
             id += 1
+            return 0
+        else:
+            return 1
 
     def checkType(self):
         r1 = isinstance(self.doe, str)
@@ -50,4 +54,4 @@ class signUp():
 
     def checkUnique(self):
         # check uniqueness of username,phone no,email
-        return 0
+        pass
