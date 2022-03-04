@@ -17,7 +17,7 @@ class OrgsignUp(signUp, c):
         self.address = address
         self.type = type
 
-    def pushData(self):
+    def push_data(self):
         st = "insert into org_profile values({id},'{name}',{num},'{email}','{address}','{type}')".format(
             id=self.i, name=self.user, num=self.num, email=self.email, address=self.address, type=self.type)
         self.cursorO.execute(st)
@@ -25,6 +25,6 @@ class OrgsignUp(signUp, c):
 
         self.i += 1
 
-    def checkType():
+    def check_type(self):
         # checking datatypes of inputs
         pass

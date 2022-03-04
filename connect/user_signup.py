@@ -16,7 +16,7 @@ class signUp(c):
         self.dob = dob
         self.doe = doe
 
-    def addData(self):
+    def add_data(self):
 
         checker = self.checkType()
         if checker == 0:
@@ -30,7 +30,7 @@ class signUp(c):
         else:
             return 1
 
-    def checkType(self):
+    def check_type(self):
         r1 = isinstance(self.doe, str)
         r2 = isinstance(self.user, str)
         r3 = isinstance(self.pwd, str)
@@ -51,6 +51,6 @@ class signUp(c):
         else:
             return 0
 
-    def checkUnique(self):
+    def check_unique(self):
         # check uniqueness of username,phone no,email
         pass
