@@ -3,12 +3,12 @@ import mysql.connector as c
 
 
 class signUp(c):
-    id = 1
     dbU = c.connect(host="localhost", user="root",
                     passwd="june16nevada19", database="user_dat")
     cursorU = dbU.cursor()
 
-    def __init_(self, user, num, pwd, email, dob, doe):
+    def __init__(self, id, user, num, pwd, email, dob, doe):
+        self.id = id
         self.user = user
         self.num = num
         self.pwd = pwd
@@ -24,8 +24,6 @@ class signUp(c):
                 Id=self.id, name=self.user, num=self.num, email=self.email, dob=self.dob, doe=self.doe, pswd=self.pwd)
             self.cursorU.execute(st)
             self.dbU.commit()
-
-            self.id += 1
             return 0
         else:
             return 1
