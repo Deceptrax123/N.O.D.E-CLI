@@ -1,13 +1,12 @@
-import mysql.connector as c
 import time
-
-con = c.connect(host="localhost", user="root",
-                passwd="<enter password>", database="user_dat")
-cursor = con.cursor()
+import mysql.connector as c
 
 
-class signUp():
+class signUp(c):
     id = 1
+    dbU = c.connect(host="localhost", user="root",
+                    passwd="june16nevada19", database="user_dat")
+    cursorU = dbU.cursor()
 
     def __init_(self, user, num, pwd, email, dob, doe):
         self.user = user
@@ -22,11 +21,11 @@ class signUp():
         checker = self.checkType()
         if checker == 0:
             st = "insert into user_details values({Id},'{name}','{num}','{email}','{dob}','{doe}','{pswd}')".format(
-                Id=id, name=self.user, num=self.num, email=self.email, dob=self.dob, doe=self.doe, pswd=self.pwd)
-            cursor.execute(st)
-            con.commit()
+                Id=self.id, name=self.user, num=self.num, email=self.email, dob=self.dob, doe=self.doe, pswd=self.pwd)
+            self.cursorU.execute(st)
+            self.dbU.commit()
 
-            id += 1
+            self.id += 1
             return 0
         else:
             return 1

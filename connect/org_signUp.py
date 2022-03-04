@@ -1,13 +1,13 @@
-import mysql.connector as cd
+
 from user_signup import signUp
-
-con = cd.connect(host="localhost", user="root",
-                 passwd="<enter password>", database="org_dat")
-cursor = con.cursor()
+import mysql.connector as c
 
 
-class OrgsignUp(signUp):
-    id = 1
+class OrgsignUp(signUp, c):
+    i = 1
+    dbO = c.connect(host="localhost", user="root",
+                    passwd="june16nevada19", database="org_dat")
+    cursorO = dbO.cursor()
 
     def __init__(self, user, num, pwd, email, address, type):
         super().__init__(
@@ -18,10 +18,12 @@ class OrgsignUp(signUp):
         self.type = type
 
     def pushData(self):
-        st = "insert into org_details values({id},'{name}',{num},'{email}','{address}','{type}')".format(
-            id=id, name=self.user, num=self.num, email=self.email, address=self.address, type=self.type)
-        cursor.execute(st)
-        con.commit()
+        st = "insert into org_profile values({id},'{name}',{num},'{email}','{address}','{type}')".format(
+            id=self.i, name=self.user, num=self.num, email=self.email, address=self.address, type=self.type)
+        self.cursorO.execute(st)
+        self.dbO.commit()
+
+        self.i += 1
 
     def checkType():
         # checking datatypes of inputs
