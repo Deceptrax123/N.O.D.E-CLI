@@ -41,7 +41,7 @@ def login(x):
         ologin = orgLogin(userName, password)
         k = ologin.authenticate()
 
-    return k
+    return k, userName
 
 
 def org_request(name):
@@ -70,7 +70,7 @@ def org_request(name):
         print("Select the request ID for which the status needs to be updated")
         req = int(input("Enter id : "))
 
-        print("Enter the status to be changed to 1->completed,0->Yet to be done")
+        print("Enter the status to be changed : 1->completed,0->Yet to be done")
         status = int(input("Enter status value : "))
 
         addReq.update_status(status, req)
@@ -99,7 +99,7 @@ def user_request(name):
     available = req.check_orgs()
 
     if available == "No available choices":
-        print("Choose another request or exit")
+        print("There are no available volunteering oppurtunities as per request")
 
     else:
         for item in available:
@@ -158,4 +158,59 @@ def user_profile(name):
         print(f"The count of completed volunteering tasks is {count}")
 
 
-user_profile("test_user3")
+print("------------------N.O.D.E-----------------")
+print("------A UNIFIED NETWORK TO DELIVER AID------")
+
+print("Press 1 for indvidual use and press 2 for organization : ")
+
+type = int(input("Enter an option based on the above prompt"))
+
+print("Select one of the two options")
+print("1--------->Login for existing users")
+print("2--------->Signup for new users")
+
+log = int(input("Enter an option based on the above prompt"))
+
+if log == 1:
+    y = login(type)
+
+    r, uName = y
+    if r == 1:
+        print("Login successful")
+
+        print(f"Welcome {uName} to N.O.D.E.")
+        print("Choose what you would like to do next")
+        print("----------------")
+
+        if type == 1:
+            opt = 0
+            while opt != 3:
+                print("1------- View profile")
+                print("2------- Apply for a volunteering service")
+                print("3------- Sign out")
+
+                opt = int(input("Enter an option"))
+
+                if(opt == 1):
+                    user_profile(uName)
+                    print("-------")
+                elif opt == 2:
+                    user_request(uName)
+                    print("-------")
+                elif opt == 3:
+                    print("Thank you for using NODE")
+                    print("Signing Out....")
+        elif type == 2:
+            print("You may add a request for volunteering and view current requests")
+            opt = 0
+            print("Press 1 to make requests and 2 to signout")
+            while opt != 2:
+                opt = int(input("Enter an option"))
+
+                if opt != 2:
+                    org_request(uName)
+                else:
+                    print("Thank you for using NODE")
+                    print("Signing Out...")
+    else:
+        print("Invalid Credentials try again")
