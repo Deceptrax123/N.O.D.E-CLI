@@ -47,7 +47,7 @@ class userLogin(c):
         ch1 = self.check_password()
         ch2 = self.check_user_name()
 
-        if ch1 == 1 and ch2 == 0:
+        if ch1 == 1 and ch2 == 1:
             return 1
         else:
             return 0
