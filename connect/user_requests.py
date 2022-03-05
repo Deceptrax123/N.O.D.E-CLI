@@ -38,7 +38,7 @@ class userRequest(signUp, c):
         return self.available_choices
 
     def update_to_profile(self, org_choice):
-        qu = "insert into {name} values('{org_name}','{Type}',0,{id})".format(
+        qu = "insert into {name} values({id},'{org_name}','{Type}',0)".format(
             name=self.user, org_name=org_choice[0], id=org_choice[1])
         self.cursorU.execute(qu)
         self.dbU.commit()

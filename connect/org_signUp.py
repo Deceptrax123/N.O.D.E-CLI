@@ -17,8 +17,8 @@ class OrgsignUp(signUp, c):
         self.type = type
 
     def push_data(self):
-        st = "insert into org_profile values({id},'{name}',{num},'{email}','{address}','{type}')".format(
-            id=self.id, name=self.user, num=self.num, email=self.email, address=self.address, type=self.type)
+        st = "insert into org_profile values({id},'{name}',{num},'{email}','{address}','{type},'{pwd}')".format(
+            id=self.id, name=self.user, num=self.num, email=self.email, address=self.address, type=self.type, pwd=self.pwd)
         self.cursorO.execute(st)
         self.dbO.commit()
 
