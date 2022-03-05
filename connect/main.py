@@ -4,6 +4,7 @@ from user_login import userLogin
 from org_signUp import orgsignUp
 from org_login import orgLogin
 from services_provided import services
+from user_requests import userRequest
 
 
 def sign_up(x):
@@ -81,3 +82,44 @@ def org_request(name):
         req = int(input("Enter id : "))
 
         addReq.delete_request(req)
+
+
+def user_request(name):
+    print("Select one of the below available volunteering activities which you are interested in")
+    print("1      Teaching")
+    print("2      Donations")
+    print("3      Medical Aid")
+
+    op = int(input("Select an option : "))
+    print("Checking for organizations that require the selected volunteering service.....")
+
+    req = userRequest(name, op)
+
+    available = req.check_orgs()
+
+    if available == "No available choices":
+        print("Choose another request or exit")
+
+    else:
+        for item in available:
+            print(list(item))
+
+        print("Select the choice of volunteering service that you would like to work")
+
+        cho = int(input("Enter an option : "))
+
+        selected_service = available[cho]
+        print("Would you like to continue with the same organization")
+        y = int(input("Enter 1 for yes and 2 for no"))
+
+        if y == 1:
+            req.update_to_profile(selected_service)
+
+            print("Fetching details of the Organization for further communication:")
+            print("Detailed added to your profile....")
+            det = req.fetch_details(selected_service)
+
+            for k in det:
+                print(k)
+        else:
+            user_request(name)

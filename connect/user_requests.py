@@ -6,13 +6,13 @@ class userRequest():
                     passwd="june16nevada19", database="user_dat")
     cursorU = dbU.cursor()
 
-    dbO = c.connect(host="june16nevada19", user="root",
-                    passwd="enter_password", database="org_dat")
+    dbO = c.connect(host="localhost", user="root",
+                    passwd="june16nevada19", database="org_dat")
     cursorO = dbO.cursor()
 
     available_choices = []
 
-    def __init__(self, user, service_choice):
+    def __init__(self, user: str, service_choice=0):
         self.user = user
         self.service_choice = service_choice
 
@@ -22,29 +22,37 @@ class userRequest():
         choice_index = self.service_choice-1
         requested_service = choices[choice_index]
 
-        que = "select * from org_services where request='{Request}'".format(
+        que = "select * from org_services where request='{Request}' and status=0".format(
             Request=requested_service)
         self.cursorO.execute(que)
 
         results = self.cursorO.fetchall()
+        if len(results) == 0:
+            return "No available choices"
+        else:
+            self.available_choices = [
+                ["Organization Name", "Service Requested", "Request Id"]]
+            for i in results:
+                self.available_choices.append([i[0], i[1], i[3]])
 
-        for i in results:
-            if i not in self.available_choices:
-                self.available_choices.append([i[0], i[3]])
-
-        return self.available_choices
+            return self.available_choices
 
     def update_to_profile(self, org_choice):
-        qu = "insert into {name} values({id},'{org_name}','{Type}',0)".format(
-            name=self.user, org_name=org_choice[0], id=org_choice[1])
+        qu = "insert into {name} values({id},'{type}','{org_name}',0)".format(
+            name=self.user, id=org_choice[2], type=org_choice[1], org_name=org_choice[0],)
         self.cursorU.execute(qu)
         self.dbU.commit()
 
     def fetch_details(self, org_choice):
-        qu = "select * from org_profile where org_name={Name}".format(
+        qu = "select org_name,org_contactno,org_email,org_address,org_type from org_profile where org_name={Name}".format(
             Name=org_choice[0])
-        self.dbO.execute(qu)
+        self.cursorO.execute(qu)
 
         details = self.dbO.fetchall()
 
-        return details
+        det = [["Name", "Contact Number", "Email", "Address", "Type"]]
+
+        for i in details:
+            det.append(list(i))
+
+        return det
