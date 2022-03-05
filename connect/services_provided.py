@@ -4,35 +4,35 @@ import random
 
 class services():
     cd = c.connect(host="localhost", user="root",
-                   passwd="enter_password", database="org_dat")
+                   passwd="june16nevada19", database="org_dat")
     cursorO = cd.cursor()
+
     req_id = 0
 
-    def __init__(self, name, request, status):
+    def __init__(self, name, request=""):
         self.name = name
         self.request = request
-        self.status = status
 
-    def insert_requests(self, Id):
-        st = "insert into org_services values('{Name}',{Request}','{Status}',{Request_id})".format(
-            Name=self.name, Request=self.request, Status=self.status, Request_id=Id)
+    def insert_requests(self, id):
+        st = "insert into org_services values('{Name}','{Request}',{Status},{Request_id})".format(
+            Name=self.name, Request=self.request, Status=0, Request_id=id)
         self.cursorO.execute(st)
         self.cd.commit()
 
-    def update_status(self):
-        st = "update org_services set Status='{Status}'where Request_id='{Request_id}'".format(
-            Status=self.status, Request_id=self.req_id)
+    def update_status(self, status, id):
+        st = "update org_services set status={Status} where request_id={Id}".format(
+            Status=status, Id=id)
         self.cursorO.execute(st)
         self.cd.commit()
 
-    def delete_request(self):
-        st = "delete from org_services where Request_id='{Request_id}'".format(
-            Request_id=self.req_id)
+    def delete_request(self, id):
+        st = "delete  from org_services where request_id={Request_id}".format(
+            Request_id=id)
         self.cursorO.execute(st)
         self.cd.commit()
 
     def generate_id(self):
-        self.req_id = random.randint(1, 1000000)
+        self.req_id = random.randint(1, 10000)
 
         k = self.check_unique(self.req_id)
 
@@ -45,7 +45,7 @@ class services():
         chq = "select * from org_services"
         self.cursorO.execute(chq)
 
-        data = self.dbO.fetchall()
+        data = self.cursorO.fetchall()
 
         all_id = []
         for i in data:
@@ -58,3 +58,17 @@ class services():
 
     def add_request(self):
         self.generate_id()
+
+    def fetch_services(self):
+        qu = "select * from org_services where org_name='{Name}'".format(
+            Name=self.name)
+        self.cursorO.execute(qu)
+
+        data = self.cursorO.fetchall()
+
+        l = [["Name", "Request", "Status", "Request Id"]]
+
+        for i in data:
+            l.append(list(i))
+
+        return l

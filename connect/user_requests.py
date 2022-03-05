@@ -17,7 +17,7 @@ class userRequest():
         self.service_choice = service_choice
 
     def check_orgs(self):
-        choices = ["Teaching", "Donation", "Medical Assistance"]
+        choices = ["Teaching", "Donation", "Medical Aid"]
 
         choice_index = self.service_choice-1
         requested_service = choices[choice_index]

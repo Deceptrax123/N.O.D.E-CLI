@@ -40,3 +40,44 @@ def login(x):
         k = ologin.authenticate()
 
     return k
+
+
+def org_request(name):
+    print("Select one of the 3 options below for type of service required")
+    print("1       Add Request")
+    print("2       Update Status")
+    print("3       Delete Request")
+
+    addReq = services(name, "")
+    op = int(input("Enter an option : "))
+    if op == 1:
+        print("Choose a required volunteering service from the following options")
+        print("Donation")
+        print("Teaching")
+        print("Medical Aid")
+
+        choice = input("Enter one of the above options :")
+
+        addReq = services(name, choice)
+        addReq.add_request()
+    elif op == 2:
+        k = addReq.fetch_services()
+        for i in k:
+            print(i)
+
+        print("Select the request ID for which the status needs to be updated")
+        req = int(input("Enter id : "))
+
+        print("Enter the status to be changed to 1->completed,0->Yet to be done")
+        status = int(input("Enter status value : "))
+
+        addReq.update_status(status, req)
+    else:
+        k = addReq.fetch_services()
+        for i in k:
+            print(i)
+
+        print("Select the request ID for which the Request needs to be removed")
+        req = int(input("Enter id : "))
+
+        addReq.delete_request(req)
