@@ -1,20 +1,15 @@
 import mysql.connector as c
-from org_signUp import OrgsignUp
 import random
 
-# Make changes to this file.
 
-
-class Services(OrgsignUp, c):
+class services():
     cd = c.connect(host="localhost", user="root",
                    passwd="enter_password", database="org_dat")
     cursorO = cd.cursor()
     req_id = 0
 
     def __init__(self, name, request, status):
-        super().__init__(
-            name
-        )
+        self.name = name
         self.request = request
         self.status = status
 

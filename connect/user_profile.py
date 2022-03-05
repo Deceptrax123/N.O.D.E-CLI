@@ -1,7 +1,7 @@
 import mysql.connector as c
 
 
-class userProfile(c):
+class userProfile():
     dbU = c.connect(host="localhost", user="root",
                     passwd="enter_pass", database="user_det")
     cursorU = dbU.cursor()

@@ -1,22 +1,19 @@
 import mysql.connector as c
-from user_signup import signUp
 
 
-class userRequest(signUp, c):
+class userRequest():
     dbU = c.connect(host="localhost", user="root",
-                    passwd="<enter_password>", database="user_dat")
+                    passwd="june16nevada19", database="user_dat")
     cursorU = dbU.cursor()
 
-    dbO = c.connect(host="localhost", user="root",
+    dbO = c.connect(host="june16nevada19", user="root",
                     passwd="enter_password", database="org_dat")
     cursorO = dbO.cursor()
 
     available_choices = []
 
     def __init__(self, user, service_choice):
-        super().__init__(
-            user
-        )
+        self.user = user
         self.service_choice = service_choice
 
     def check_orgs(self):

@@ -1,25 +1,24 @@
 import mysql.connector as c
 
 
-class orgLogin(c):
+class orgLogin():
     dbO = c.connect(host="localhost", user="root",
-                    passwd="enter pass", database="org_data")
+                    passwd="june16nevada19", database="org_dat")
     cursorO = dbO.cursor()
 
     def __init__(self, user, pwd):
-        super().__init__(
-            user, pwd
-        )
+        self.user = user
+        self.pwd = pwd
 
     def check_user_name(self):
         self.que = "select * from org_profile"
-        self.cursorU.execute(self.que)
+        self.cursorO.execute(self.que)
 
-        data = self.dbU.fetchall()
+        data = self.cursorO.fetchall()
 
         names = []
         for i in data:
-            names.append(i[1])
+            names.append(i[0])
 
         if self.user in names:
             return 1
@@ -28,14 +27,14 @@ class orgLogin(c):
 
     def check_password(self):
         self.que = "select * from org_profile"
-        self.cursorU.execute(self.que)
+        self.cursorO.execute(self.que)
 
-        data = self.dbU.fetchall()
+        data = self.cursorO.fetchall()
         pw = ""
 
         for i in data:
-            if i[1] == self.user:
-                pw = i[6]
+            if i[0] == self.user:
+                pw = i[5]
                 break
         if pw == self.pwd:
             return 1

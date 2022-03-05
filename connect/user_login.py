@@ -1,9 +1,9 @@
 import mysql.connector as c
 
 
-class userLogin(c):
+class userLogin():
     dbU = c.connect(host='localhost', user="root",
-                    passwd="enter_pass", database="user_data")
+                    passwd="june16nevada19", database="user_dat")
     cursorU = dbU.cursor()
 
     que = ""
@@ -16,11 +16,11 @@ class userLogin(c):
         self.que = "select * from user_details"
         self.cursorU.execute(self.que)
 
-        data = self.dbU.fetchall()
+        data = self.cursorU.fetchall()
 
         names = []
         for i in data:
-            names.append(i[1])
+            names.append(i[0])
 
         if self.user in names:
             return 1
@@ -31,12 +31,12 @@ class userLogin(c):
         self.que = "select * from user_details"
         self.cursorU.execute(self.que)
 
-        data = self.dbU.fetchall()
+        data = self.cursorU.fetchall()
         pw = ""
 
         for i in data:
-            if i[1] == self.user:
-                pw = i[7]
+            if i[0] == self.user:
+                pw = i[6]
                 break
         if pw == self.pwd:
             return 1
@@ -44,8 +44,8 @@ class userLogin(c):
             return 0
 
     def authenticate(self):
-        ch1 = self.check_password()
-        ch2 = self.check_user_name()
+        ch1 = self.check_user_name()
+        ch2 = self.check_password()
 
         if ch1 == 1 and ch2 == 1:
             return 1
