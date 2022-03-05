@@ -5,6 +5,7 @@ from org_signUp import orgsignUp
 from org_login import orgLogin
 from services_provided import services
 from user_requests import userRequest
+from user_profile import userProfile
 
 
 def sign_up(x):
@@ -115,11 +116,46 @@ def user_request(name):
         if y == 1:
             req.update_to_profile(selected_service)
 
-            print("Fetching details of the Organization for further communication:")
-            print("Detailed added to your profile....")
+            print("Fetching details of the Organization for further communication....")
+            print("Details  added to your profile....")
             det = req.fetch_details(selected_service)
 
             for k in det:
                 print(k)
         else:
             user_request(name)
+
+
+def user_profile(name):
+    print(f"Profile of {name}")
+    print("User details section: ")
+
+    profile = userProfile(name)
+
+    userDetails = profile.fetch_userdetails()
+
+    l1 = ["Name", "Mobile number", "Email",
+          "Date of Birth", "Address", "Profession"]
+    l2 = list()
+    for i in userDetails:
+        l2.append(i)
+
+    for k in range(0, len(l1)):
+        print(f"{l1[k]}------->{l2[k]}")
+
+    print(f"{name} Volunteering Stats")
+
+    volunteering = profile.fetch_user_requests()
+
+    if volunteering == 0:
+        print("Currently No requests have been made or completed.")
+    else:
+        for j in volunteering:
+            print(j)
+
+        count = profile.count_completed_task()
+
+        print(f"The count of completed volunteering tasks is {count}")
+
+
+user_profile("test_user3")
