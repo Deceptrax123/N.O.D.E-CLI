@@ -18,11 +18,9 @@ class Services(OrgsignUp, c):
         self.request = request
         self.status = status
 
-    def add_requests(self):
-
-        self.req_id = random.randrange(1, 100000)
+    def insert_requests(self, Id):
         st = "insert into org_services values('{Name}',{Request}','{Status}',{Request_id})".format(
-            Name=self.name, Request=self.request, Status=self.status, Request_id=self.req_id)
+            Name=self.name, Request=self.request, Status=self.status, Request_id=Id)
         self.cursorO.execute(st)
         self.cd.commit()
 
@@ -38,6 +36,30 @@ class Services(OrgsignUp, c):
         self.cursorO.execute(st)
         self.cd.commit()
 
-    def unique_id(self):
-        # run id check
-        pass
+    def generate_id(self):
+        self.req_id = random.randint(1, 1000000)
+
+        k = self.check_unique(self.req_id)
+
+        if k == 1:
+            self.insert_requests(self.req_id)
+        else:
+            self.generate_id()
+
+    def check_unique(self, r_id):
+        chq = "select * from org_services"
+        self.cursorO.execute(chq)
+
+        data = self.dbO.fetchall()
+
+        all_id = []
+        for i in data:
+            all_id.append(i[3])
+
+        if r_id not in all_id:
+            return 1
+        else:
+            return 0
+
+    def add_request(self):
+        self.generate_id()
