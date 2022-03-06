@@ -1,3 +1,6 @@
+# Adds volunteering services requested by an organization.
+
+
 import mysql.connector as c
 import random
 

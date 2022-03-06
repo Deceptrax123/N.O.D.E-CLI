@@ -1,3 +1,5 @@
+# Accepts volunteering requests by users and maps them to specific organizations.
+
 import mysql.connector as c
 
 

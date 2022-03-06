@@ -1,4 +1,4 @@
-
+# Organization signup
 import mysql.connector as c
 
 
@@ -20,7 +20,3 @@ class orgsignUp():
              name=self.user, num=self.num, email=self.email, address=self.add, type=self.type, pwd=self.pwd)
         self.cursorO.execute(st)
         self.dbO.commit()
-
-    def check_type(self):
-        # checking datatypes of inputs
-        pass

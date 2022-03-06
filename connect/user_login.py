@@ -1,3 +1,6 @@
+# Individual user authentication
+
+
 import mysql.connector as c
 
 

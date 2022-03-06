@@ -1,3 +1,5 @@
+# Fetches user-profile.
+
 import mysql.connector as c
 
 

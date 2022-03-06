@@ -1,4 +1,6 @@
-# Project that centralizes all services.
+# Run this module for testing.
+
+
 from user_signup import signUp
 from user_login import userLogin
 from org_signUp import orgsignUp

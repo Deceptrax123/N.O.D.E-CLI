@@ -1,3 +1,5 @@
+# User sign-up
+
 import mysql.connector as c
 
 
