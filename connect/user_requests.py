@@ -44,11 +44,11 @@ class userRequest():
         self.dbU.commit()
 
     def fetch_details(self, org_choice):
-        qu = "select org_name,org_contactno,org_email,org_address,org_type from org_profile where org_name={Name}".format(
+        qu = "select org_name,org_contactno,org_email,org_address,org_type from org_profile where org_name='{Name}'".format(
             Name=org_choice[0])
         self.cursorO.execute(qu)
 
-        details = self.dbO.fetchall()
+        details = self.cursorO.fetchall()
 
         det = [["Name", "Contact Number", "Email", "Address", "Type"]]
 

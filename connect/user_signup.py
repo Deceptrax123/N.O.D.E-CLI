@@ -1,4 +1,3 @@
-import time
 import mysql.connector as c
 
 
@@ -16,18 +15,11 @@ class signUp():
         self.doe = doe
         self.add = add
 
-    def add_data(self):
+    def commit_data(self):
         st = "insert into user_details values('{name}','{num}','{email}','{dob}','{add}','{doe}','{pswd}')".format(
             name=self.user, num=self.num, email=self.email, dob=self.dob, add=self.add, doe=self.doe, pswd=self.pwd)
         self.cursorU.execute(st)
         self.dbU.commit()
-
-    def check_unique(self):
-        # check uniqueness of username,phone no,email
-        pass
-
-    def commit_data(self):
-        self.add_data()
 
     def create_user_profile(self):
         cre = "create table {Name} (id int(100),service varchar(100),org varchar(100),status int(10))".format(
