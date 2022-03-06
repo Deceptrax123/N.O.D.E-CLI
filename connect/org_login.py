@@ -3,7 +3,7 @@ import mysql.connector as c
 
 class orgLogin():
     dbO = c.connect(host="localhost", user="root",
-                    passwd="june16nevada19", database="org_dat")
+                    passwd="", database="org_dat")
     cursorO = dbO.cursor()
 
     def __init__(self, user, pwd):

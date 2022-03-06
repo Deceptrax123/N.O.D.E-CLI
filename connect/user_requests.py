@@ -3,11 +3,11 @@ import mysql.connector as c
 
 class userRequest():
     dbU = c.connect(host="localhost", user="root",
-                    passwd="june16nevada19", database="user_dat")
+                    passwd="", database="user_dat")
     cursorU = dbU.cursor()
 
     dbO = c.connect(host="localhost", user="root",
-                    passwd="june16nevada19", database="org_dat")
+                    passwd="", database="org_dat")
     cursorO = dbO.cursor()
 
     available_choices = []

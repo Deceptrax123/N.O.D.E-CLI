@@ -4,7 +4,7 @@ import random
 
 class services():
     cd = c.connect(host="localhost", user="root",
-                   passwd="june16nevada19", database="org_dat")
+                   passwd="", database="org_dat")
     cursorO = cd.cursor()
 
     req_id = 0

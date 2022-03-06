@@ -3,7 +3,7 @@ import mysql.connector as c
 
 class userProfile():
     dbU = c.connect(host="localhost", user="root",
-                    passwd="june16nevada19", database="user_dat")
+                    passwd="", database="user_dat")
     cursorU = dbU.cursor()
 
     def __init__(self, user):
