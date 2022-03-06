@@ -25,6 +25,8 @@ HOW THE PROGRAM WORKS:
 HOW TO CONTRIBUTE: 
 1. Install Python and MySQL 
 2. Pip install mysql-connector-python
+3. Run sql_script.py
+4. For testing run main.py
 
 <br/>
 <br/>
